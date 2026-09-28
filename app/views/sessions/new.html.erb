@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-16">
+<h2>Log in</h2>
+
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<%= form_with url: session_path do |f| %>
+
+    <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :remember_me %>
+    <label for="user_remember_me">Remember me</label>
+  </div>
+  
+  <div class="actions">
+    <input type="submit" name="commit" value="Log in" class="btn btn-sm btn-primary" data-disable-with="Log in">
+  </div>
+<% end %>
+</div>
+  </div>
+
+<div>
+  <%= link_to "Sign up", new_user_path %>
+</div>
+  <%= link_to "Forgot password?", new_password_path %>
+
+

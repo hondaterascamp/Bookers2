@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "users/info", user: @user %>
+      <%= render "books/form", book: @book_new %>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tr>
+          <td>
+            <%= link_to user_path(@book.user) do %>
+              <% if @book.user.profile_image.attached? %>
+                <%= image_tag @book.user.profile_image, size: "50x50" %>
+              <% else %>
+                <%= image_tag "no_image.jpg", size: "50x50" %>
+              <% end %>
+              <br><%= @book.user.name %>
+            <% end %>
+          </td>
+          <td><%= @book.title %></td>
+          <td><%= @book.body %></td>
+          <% if @book.user == current_user %>
+            <td><%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
+            <td><%= link_to "Destroy", book_path(@book), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-sm btn-danger" %></td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
