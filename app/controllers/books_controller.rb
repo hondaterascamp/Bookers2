@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def index
     @user = current_user
@@ -24,7 +25,7 @@ class BooksController < ApplicationController
     else
       @user = current_user
       @books = Book.all
-      render :new, status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 
@@ -51,5 +52,12 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+
+  def is_matching_login_user
+    book = Book.find(params[:id])
+    unless book.user == current_user
+      redirect_to books_path and return
+    end
   end
 end

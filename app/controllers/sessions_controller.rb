@@ -5,10 +5,11 @@ class SessionsController < ApplicationController
   def new
   end
 
+
 def create
   if user = User.authenticate_by(params.permit(:name, :password))
     start_new_session_for user
-    redirect_to user_path(user)
+    redirect_to user_path(user), notice: "Logged in successfully."
   else
     redirect_to new_session_path, alert: "Try another name or password."
   end
@@ -16,6 +17,6 @@ end
 
   def destroy
     terminate_session
-    redirect_to after_logout_url
+    redirect_to after_logout_url, notice: "Signed out successfully."
   end
 end

@@ -3,6 +3,17 @@
     <div class="col-md-6 mx-auto">
       <h2>User info</h2>
       <%= form_with model: @user do |f| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <p><%= @user.errors.count %> error(s) prohibited this user from being saved:</p>
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        
         <div class="form-group mb-3">
           <%= f.label :name %>
           <%= f.text_field :name, class: "form-control" %>

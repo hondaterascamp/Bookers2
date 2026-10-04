@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+  # allow_browser versions: :modern
 
   private
 
@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_logout_url
-    about_path
+    root_path
   end
 end
